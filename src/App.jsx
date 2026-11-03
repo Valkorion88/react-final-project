@@ -7,7 +7,7 @@ import Footer from "./components/Footer"
 
 export default function App() {
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <div className="app">
         <Navbar />
         <Routes>
