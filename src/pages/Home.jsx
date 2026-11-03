@@ -45,12 +45,24 @@ export default function HomePage() {
         )}
       </div>
 
-      <section className={`movies ${loading ? "movies__loading" : ""}`}>
+      <section className="movies" aria-busy={loading}>
         {loading && (
-          <div className="loading-state">
-            <i className="fas fa-spinner fa-spin movies__loading--spinner"></i>
-            <p>Searching movie vault...</p>
-          </div>
+          <>
+            <p className="visually-hidden" role="status">
+              Loading movie search results
+            </p>
+            {Array.from({ length: 10 }, (_, index) => (
+              <div
+                className="movie-card--skeleton"
+                aria-hidden="true"
+                key={`movie-skeleton-${index}`}
+              >
+                <div className="movie-card__img--skeleton" />
+                <div className="movie-card__title--skeleton" />
+                <div className="movie-card__year--skeleton" />
+              </div>
+            ))}
+          </>
         )}
 
         {!loading && error && (

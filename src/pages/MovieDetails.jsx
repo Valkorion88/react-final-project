@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchMovieById } from "../services/omdbApi";
+import MoviePoster from "../components/MoviePoster";
 
 function getSentences(text) {
   if (typeof Intl.Segmenter === "function") {
@@ -70,10 +71,6 @@ export default function MovieDetailPage() {
     );
   }
 
-  const poster =
-    movie.Poster && movie.Poster !== "N/A"
-      ? movie.Poster
-      : "https://via.placeholder.com/300x450?text=No+Poster";
   const metadata = [
     ["Released", movie.Released],
     ["Director", movie.Director],
@@ -99,7 +96,7 @@ export default function MovieDetailPage() {
 
       <article className="movie-detail__grid">
         <figure className="movie-detail__poster">
-          <img src={poster} alt={`${movie.Title} poster`} />
+          <MoviePoster poster={movie.Poster} title={movie.Title} />
         </figure>
 
         <div className="movie-detail__content">
